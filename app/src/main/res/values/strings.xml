@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">InAndOut</string>
+    <string name="main_menu_log">LOG</string>
+    <string name="main_menu_map">MAP</string>
+    <string name="main_menu_statistics">STATISTICS</string>
+    <string name="main_menu_register">REGISTER</string>
+</resources>

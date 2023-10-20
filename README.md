@@ -1,2 +1,2 @@
-# InAndOut
-Android Application Project
+# ino
+Repository for Android Application "In And Out"
