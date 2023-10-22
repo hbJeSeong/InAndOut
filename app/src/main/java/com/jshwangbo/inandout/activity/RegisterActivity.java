@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.INOConstants;
+import com.jshwangbo.inandout.util.password.PasswordUtil;
 
 public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
@@ -30,14 +31,14 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
         if (v.getId() == R.id.button_submit) {
             if(isValidStateForSubmit()){
-                if (isPasswordValid(editTextPw.getText().toString(), editTextRePw.getText().toString())) {
+                if (isPasswordCorrect(editTextPw.getText().toString(), editTextRePw.getText().toString())) {
                     new AlertDialog.Builder(this)
-                            .setTitle("REGISETER")
-                            .setMessage("Are You Sure?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            .setTitle("사용자 등록")
+                            .setMessage("진행하시겠습니까?")
+                            .setPositiveButton("네", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Log.d(TAG, "User Select \"OK\"");
+                                    Log.d(TAG, ":: onClick :: Selected Item is \"YES\"");
                                     editTextId.setText("");
                                     editTextPw.setText("");
                                     editTextRePw.setText("");
@@ -45,10 +46,10 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
                                     finish();
                                 }
                             })
-                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("아니오", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Log.d(TAG, "User Select \"CANCEL\"");
+                                    Log.d(TAG, ":: onClick :: Selected Item is \"NO\"");
                                     editTextPw.setText("");
                                     editTextRePw.setText("");
                                     Toast.makeText(registerActivity, "", Toast.LENGTH_SHORT).show();
@@ -57,11 +58,11 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
                             .create()
                             .show();
                 } else {
-                    Toast.makeText(this, "Please Check Password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "비밀번호를 다시 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
 
             } else {
-                Toast.makeText(this, "Please Enter ID and PW", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "ID와 PW를 입력해주세요.", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -113,8 +114,13 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
         super.onDestroy();
     }
 
-    private boolean isPasswordValid(String arg1, String arg2){
-        return arg1.equals(arg2);
+    private boolean isPasswordCorrect(String arg1, String arg2){
+        Log.d(TAG, ":: isPasswordCorrect");
+        if (PasswordUtil.isValidPassword(arg1)){
+            if (arg1.equals(arg2))
+                return true;
+        }
+        return false;
     }
 
     private boolean isValidStateForSubmit(){
