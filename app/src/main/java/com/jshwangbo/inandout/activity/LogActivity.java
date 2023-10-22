@@ -67,11 +67,11 @@ public class LogActivity extends AppCompatActivity implements MyWidget {
 
             if (!this.ckBoxDate.isChecked()) {
                 bIsBoxChecked = false;
-                Toast.makeText(this, "If you want Specific Day's Data, then Check", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "특정 날짜의 정보를 원하면 체크가 필요합니다.", Toast.LENGTH_SHORT).show();
                 this.btnDate.setClickable(false);
             } else {
                 bIsBoxChecked = true;
-                Toast.makeText(this, "If you want all Data, then Uncheck", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "모든 정보를 원하면 체크를 해제하시오.", Toast.LENGTH_SHORT).show();
                 this.btnDate.setClickable(true);
             }
 
@@ -111,7 +111,7 @@ public class LogActivity extends AppCompatActivity implements MyWidget {
             date = dateFormat.format(now);
             txtViewDate.setText(date);
 
-            Log.d(TAG, "Get Current Date " + date);
+            Log.d(TAG, ":: initWidget() :: getDate :: " + String.format("[%11s ]", date));
 
         } catch (Exception e){
             date = INIT_DATE;

@@ -90,6 +90,12 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호는 8자리 이상 16자리 이하로 설정해주세요."
+        android:textSize="12sp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_submit"
         android:layout_marginHorizontal="20dp"
