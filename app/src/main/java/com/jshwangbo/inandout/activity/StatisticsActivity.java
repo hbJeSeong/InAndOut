@@ -10,7 +10,7 @@ import com.jshwangbo.inandout.util.INOConstants;
 
 public class StatisticsActivity extends AppCompatActivity implements MyWidget{
 
-    static String TAG = INOConstants.TAG_STATISTICSACTIVITY;
+    static String TAG = INOConstants.STATISTICSACTIVITY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

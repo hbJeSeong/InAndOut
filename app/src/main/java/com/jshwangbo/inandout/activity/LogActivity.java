@@ -13,7 +13,6 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jshwangbo.inandout.BuildConfig;
 import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.INOConstants;
 
@@ -23,7 +22,7 @@ import java.util.Date;
 
 public class LogActivity extends AppCompatActivity implements MyWidget {
 
-    static String TAG = INOConstants.TAG_LOGACTIVITY;
+    static String TAG = INOConstants.LOGACTIVITY;
     public AppCompatButton btnDate;
     public AppCompatButton btnLoad;
     public CheckBox ckBoxDate;
@@ -40,7 +39,6 @@ public class LogActivity extends AppCompatActivity implements MyWidget {
         setContentView(R.layout.activity_log);
         bIsBoxChecked = true;
 
-        Log.d(TAG, "MAIN SERVER IP IS " + BuildConfig.MAIN_SERVER_IP);
         initWidget();
     }
 
@@ -80,12 +78,12 @@ public class LogActivity extends AppCompatActivity implements MyWidget {
 
             if(bIsBoxChecked) {
                 if(date.equals(INIT_DATE) || date == null) {
-                    tmp = "Please Check The Date";
+                    tmp = "날짜가 잘못되었습니다. 다시 확인해주세요.";
                 } else {
-                    tmp = "Please Wait, Get \'" + date + "\'s Data From Server";
+                    tmp = "잠시만 기다려주세요, \'" + date + "\'의 정보를 불러옵니다.";
                 }
             } else {
-                tmp = "Please Wait, Get All Data From Server";
+                tmp = "모든 정보를 불러옵니다. 잠시만 기다려주세요";
             }
 
             Toast.makeText(this, tmp, Toast.LENGTH_SHORT).show();

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import android.app.usage.NetworkStatsManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,7 +22,7 @@ import com.jshwangbo.inandout.util.network.NetworkUtil;
 
 public class MainActivity extends AppCompatActivity implements MyWidget{
 
-    static String TAG = INOConstants.TAG_MAINACTIVITY;
+    static String TAG = INOConstants.MAINACTIVITY;
     public static MainActivity mainActivity;
     public static NetworkReceiver networkReceiver;
 

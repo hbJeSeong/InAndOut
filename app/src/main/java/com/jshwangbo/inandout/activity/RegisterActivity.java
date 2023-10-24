@@ -18,7 +18,7 @@ import com.jshwangbo.inandout.util.password.PasswordUtil;
 
 public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
-    static String TAG = INOConstants.TAG_REGISTERACTIVITY;
+    static String TAG = INOConstants.REGISTERACTIVITY;
     public AppCompatButton btnSubmit;
     public EditText editTextId;
     public EditText editTextPw;

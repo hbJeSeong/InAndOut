@@ -1,6 +1,5 @@
 package com.jshwangbo.inandout.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.PackageInfo;
@@ -27,7 +26,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class MapActivity extends AppCompatActivity {
 
-    static String TAG = INOConstants.TAG_MAPACTIVITY;
+    static String TAG = INOConstants.MAPACTIVITY;
     public MapActivity mapActivity;
     MapView mapView = null;
     @Override

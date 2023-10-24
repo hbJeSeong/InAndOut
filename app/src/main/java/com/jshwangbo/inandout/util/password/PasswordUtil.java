@@ -5,7 +5,7 @@ import android.util.Log;
 import com.jshwangbo.inandout.util.INOConstants;
 
 public class PasswordUtil {
-    public static final String TAG = INOConstants.TAG_PASSWORD_UTIL;
+    public static final String TAG = INOConstants.PASSWORD_UTIL;
     public static boolean isValidPassword(final String str){
         boolean result = false;
         String ret      = null;
