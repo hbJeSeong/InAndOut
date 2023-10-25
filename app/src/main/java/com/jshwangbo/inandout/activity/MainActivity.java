@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
     private AppCompatButton btnMap;
     private AppCompatButton btnStatistics;
     private AppCompatButton btnRegister;
+    private AppCompatButton btnG2h;
+    private AppCompatButton btnG2w;
     private ImageView imgBtnReload;
     private ImageView imgHome;
     private ImageView imgStatus;
@@ -92,11 +95,71 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
                 Animation animation = AnimationUtils.loadAnimation(mainActivity.getApplicationContext(), R.anim.anim_reload);
                 v.startAnimation(animation);
 
+                this.imgStatus.setAnimation(null);
+                this.imgStatus.setVisibility(View.INVISIBLE);
+                this.imgCompany.setImageResource(R.drawable.icon_company_disable);
+                this.imgHome.setImageResource(R.drawable.icon_home_disable);
+
+            } else if (v.getId() == R.id.button_gh){
+                Log.d(TAG, ":: CASE :: \"Go Home\"");
+
+                String sStatusTmp = userStatus.getUserStatus();
+                if (sStatusTmp.equals(INOConstants.USER_STATUS_100) || sStatusTmp.equals(INOConstants.USER_STATUS_102)){
+                    Toast.makeText(mainActivity, "잘못된 요청입니다. 현재 상태 " + sStatusTmp, Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, ":: CASE :: \"Go Home\" Wrong Request");
+                } else if (sStatusTmp.equals(INOConstants.USER_STATUS_101)){
+                    imgStatus.clearAnimation();
+                    imgStatus.setVisibility(View.INVISIBLE);
+                    imgHome.setImageResource(R.drawable.icon_home);
+                    imgCompany.setImageResource(R.drawable.icon_company_disable);
+                    Toast.makeText(mainActivity, "퇴근 완료!!", Toast.LENGTH_SHORT).show();
+                    userStatus.setsUserStatus(INOConstants.USER_STATUS_102);
+                    Log.d(TAG, ":: CASE :: \"Go Home\" DONE");
+                } else {
+                    this.imgStatus.setVisibility(View.VISIBLE);
+
+                    Animation animation = AnimationUtils.loadAnimation(mainActivity.getApplicationContext(), R.anim.anim_g2h);
+
+                    imgHome.setImageResource(R.drawable.icon_home);
+                    imgCompany.setImageResource(R.drawable.icon_company_disable);
+                    imgStatus.setImageResource(R.drawable.icon_r2l);
+
+                    imgStatus.startAnimation(animation);
+                    userStatus.setsUserStatus(INOConstants.USER_STATUS_101);
+                    Log.d(TAG, ":: CASE :: \"Go Home\" Change User Status");
+                }
+
+            } else if (v.getId() == R.id.button_gtw){
+                Log.d(TAG, ":: CASE :: \"Go To Work\"");
+
+                String sStatusTmp = userStatus.getUserStatus();
+                if (sStatusTmp.equals(INOConstants.USER_STATUS_103) || sStatusTmp.equals(INOConstants.USER_STATUS_101)){
+                    Log.d(TAG, ":: CASE :: \"Go To Work\" Wrong Request");
+                    Toast.makeText(mainActivity, "잘못된 요청입니다. 현재 상태 " + sStatusTmp, Toast.LENGTH_SHORT).show();
+                } else if (sStatusTmp.equals(INOConstants.USER_STATUS_100)) {
+                    imgStatus.clearAnimation();
+                    imgStatus.setVisibility(View.INVISIBLE);
+                    imgHome.setImageResource(R.drawable.icon_home_disable);
+                    imgCompany.setImageResource(R.drawable.icon_company);
+                    Toast.makeText(mainActivity, "출근 완료!!", Toast.LENGTH_SHORT).show();
+                    userStatus.setsUserStatus(INOConstants.USER_STATUS_103);
+                    Log.d(TAG, ":: CASE :: \"Go To Work\" DONE");
+                } else {
+                    this.imgStatus.setVisibility(View.VISIBLE);
+
+                    Animation animation = AnimationUtils.loadAnimation(mainActivity.getApplicationContext(), R.anim.anim_g2w);
+                    imgHome.setImageResource(R.drawable.icon_home_disable);
+                    imgCompany.setImageResource(R.drawable.icon_company);
+                    imgStatus.setImageResource(R.drawable.icon_l2r);
+
+                    imgStatus.startAnimation(animation);
+                    userStatus.setsUserStatus(INOConstants.USER_STATUS_100);
+                    Log.d(TAG, ":: CASE :: \"Go To Work\" Change User Status");
+                }
             } else {
                 iTargetActivity = null;
                 Log.d(TAG, "Wrong Button ID");
             }
-
             if(iTargetActivity == null) {
                 Log.d(TAG, ":: iTargetActivity is Null Object");
             } else {
@@ -115,6 +178,8 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
         btnLog          = (AppCompatButton) mainActivity.findViewById(R.id.button_log);
         btnMap          = (AppCompatButton) mainActivity.findViewById(R.id.button_map);
         btnStatistics   = (AppCompatButton) mainActivity.findViewById(R.id.button_statistics);
+        btnG2h          = (AppCompatButton) mainActivity.findViewById(R.id.button_gh);
+        btnG2w          = (AppCompatButton) mainActivity.findViewById(R.id.button_gtw);
 
         imgBtnReload    = (ImageView) mainActivity.findViewById(R.id.img_button_reload);
         imgHome         = (ImageView) mainActivity.findViewById(R.id.img_home);
@@ -125,7 +190,12 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
         btnRegister.setOnClickListener(this);
         btnLog.setOnClickListener(this);
         btnMap.setOnClickListener(this);
+        btnG2h.setOnClickListener(this);
+        btnG2w.setOnClickListener(this);
         imgBtnReload.setOnClickListener(this);
+
+        imgCompany.setImageResource(R.drawable.icon_company_disable);
+        imgHome.setImageResource(R.drawable.icon_home_disable);
 
         mainActivity.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
@@ -136,10 +206,14 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
         setContentView(R.layout.activity_main);
 
         userStatus = new UserStatus();
+//        userStatus.setsUserStatus(INOConstants.USER_STATUS_103);
 
         mainActivity        = this;
         networkReceiver     = new NetworkReceiver(this);
         initWidget();
+
+//        Log.d(TAG, "GET UNIQUE VALUE :: " + Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+
     }
 
     public static void networkConnect(Callbacks cb){

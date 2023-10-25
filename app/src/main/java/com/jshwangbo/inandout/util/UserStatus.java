@@ -3,6 +3,7 @@ package com.jshwangbo.inandout.util;
 import android.util.Log;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserStatus {
@@ -23,7 +24,7 @@ public class UserStatus {
     }
 
     public UserStatus(){
-        this(null, false);
+        this(INOConstants.USER_STATUS_104, false);
     }
 
     public void setsUserStatus(String sUserStatus) {
@@ -41,14 +42,14 @@ public class UserStatus {
             return;
         Log.d(TAG, " :: set DateUnit :: " + sTag);
         switch (sTag) {
-            case INOConstants.TAG_DATE_UNIT_COMMON:
-                this.dateUnit = new DateUnit(sTag, new Date());
+            case INOConstants.TYPE_DATE_UNIT_COMMON:
+                this.dateUnit = new DateUnit(new Date());
                 break;
-            case INOConstants.TAG_DATE_UNIT_CURRENT_UPLOAD:
-                this.currentUpload = new DateUnit(sTag, new Date());
+            case INOConstants.TYPE_DATE_UNIT_CURRENT_UPLOAD:
+                this.currentUpload = new DateUnit(new Date());
                 break;
-            case INOConstants.TAG_DATE_UNIT_CURRENT_DOWNLOAD:
-                this.currentDownload = new DateUnit(sTag, new Date());
+            case INOConstants.TYPE_DATE_UNIT_CURRENT_DOWNLOAD:
+                this.currentDownload = new DateUnit(new Date());
                 break;
             default:
                 Log.d(TAG, "Fail to Setting Date Unit :: Wrong TAG :: " + sTag);
@@ -68,9 +69,13 @@ public class UserStatus {
         return this.dateUnit;
     }
 
+    public String getUserStatus(){
+        return this.sUserStatus;
+    }
+
     private boolean isValidTag(final String sTag){
-        return sTag.equals(INOConstants.TAG_DATE_UNIT_CURRENT_UPLOAD) || sTag.equals(INOConstants.TAG_DATE_UNIT_CURRENT_DOWNLOAD)
-                || sTag.equals(INOConstants.TAG_DATE_UNIT_COMMON);
+        return sTag.equals(INOConstants.TYPE_DATE_UNIT_CURRENT_UPLOAD) || sTag.equals(INOConstants.TYPE_DATE_UNIT_CURRENT_DOWNLOAD)
+                || sTag.equals(INOConstants.TYPE_DATE_UNIT_COMMON);
     }
 
     public void printUserStatusInfo(){
@@ -88,11 +93,34 @@ public class UserStatus {
                         "+ TIME : %s\n" +
                         "------------------------------\n" +
                         "[ Date Unit ]\n" +
-                        "+ TAG  : %s\n" +
                         "+ Date : %s\n" +
                         "+ TIME : %s\n" +
                         "==============================",
-                this.sUserStatus, this.currentDownload.sDate, this.currentDownload.sTime, this.currentUpload.sDate, this.currentUpload.sTime, this.dateUnit.sTag, this.dateUnit.sDate, this.dateUnit.sTime);
+                this.sUserStatus, this.currentDownload.sDate, this.currentDownload.sTime, this.currentUpload.sDate, this.currentUpload.sTime, this.dateUnit.sDate, this.dateUnit.sTime);
         Log.d(TAG, ":: Print User Status Information \n" + tmp);
     }
+
+    public void action(final String str){
+
+    }
+}
+
+class DateUnit {
+    public static final String TAG = INOConstants.DATEUNIT;
+    public String sDate;
+    public String sTime;
+
+    public DateUnit(Date date) {
+        String tmp = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(date);
+        this.sDate = tmp.substring(0, tmp.indexOf(" "));
+        this.sTime = tmp.substring(tmp.indexOf(" ") + 1);
+        Log.d(TAG, ":: Date Unit :: New Instance :: " + sDate + " | " + sTime);
+    }
+
+    public DateUnit(){
+        this.sDate = null;
+        this.sTime = null;
+        Log.d(TAG, ":: Date Unit :: New Instance :: null");
+    }
+
 }

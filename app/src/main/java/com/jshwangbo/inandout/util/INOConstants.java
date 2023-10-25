@@ -18,6 +18,7 @@ public class INOConstants {
     public static final String USER_STATUS_101 = "STATUS_GO_TO_HOME";
     public static final String USER_STATUS_102 = "STATUS_REST";
     public static final String USER_STATUS_103 = "STATUS_WORK";
+    public static final String USER_STATUS_104 = "STATUS_INIT";
 
     // Constants for Network Status
     public static final String NETWORK_STATE_CONNECTED      = "NETWORK_CONNECTED";
@@ -39,7 +40,7 @@ public class INOConstants {
     public static final String TAG_USER_INFO_ID = "USER_INFO_ID";
 
     // Constants for DateUnit Tag
-    public static final String TAG_DATE_UNIT_CURRENT_UPLOAD = "DATEUNIT_CURRENT_UPLOAD";
-    public static final String TAG_DATE_UNIT_CURRENT_DOWNLOAD = "DATEUNIT_CURRENT_DOWNLOAD";
-    public static final String TAG_DATE_UNIT_COMMON = "DATEUNIT";
+    public static final String TYPE_DATE_UNIT_CURRENT_UPLOAD = "DATEUNIT_CURRENT_UPLOAD";
+    public static final String TYPE_DATE_UNIT_CURRENT_DOWNLOAD = "DATEUNIT_CURRENT_DOWNLOAD";
+    public static final String TYPE_DATE_UNIT_COMMON = "DATEUNIT";
 }
