@@ -5,51 +5,135 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_marginHorizontal="20dp"
     android:layout_marginVertical="10dp"
     tools:context=".activity.MainActivity">
 
     <ImageView
-        android:id="@+id/image_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/img_button_reload"
+        android:layout_gravity="right"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/icon_reload"
+        android:clickable="true"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_log"
+    <TextView
+        android:id="@+id/txt_status"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="50sp"
+        android:layout_marginBottom="20dp"
+        android:text=""
+        android:gravity="center_horizontal"
+        android:textStyle="italic|bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="40dp">
+
+        <ImageView
+            android:id="@+id/img_home"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_home"/>
+
+        <ImageView
+            android:id="@+id/img_status"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="10dp"/>
+
+        <ImageView
+            android:id="@+id/img_company"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_company"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_menu_log"
-        android:textSize="30sp"
-        android:background="@color/colorAccent"
-        android:layout_margin="10dp"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="2">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_map"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_gtw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출근"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:background="#07C800"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_gh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="퇴근"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:background="#6DFF0000"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_menu_map"
-        android:textSize="30sp"
-        android:background="@color/colorAccent"
-        android:layout_margin="10dp"/>
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_statistics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_statistics"
-        android:textSize="30sp"
-        android:background="@color/colorAccent"
-        android:layout_margin="10dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu_log"
+            android:textSize="30sp"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_register"
-        android:textSize="30sp"
-        android:textColor="@color/white"
-        android:background="@color/black"
-        android:layout_margin="10dp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu_map"
+            android:textSize="30sp"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_statistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu_statistics"
+            android:textSize="30sp"
+            android:background="@color/colorAccent"
+            android:layout_margin="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu_register"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:background="@color/black"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

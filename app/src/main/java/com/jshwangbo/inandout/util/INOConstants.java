@@ -10,12 +10,14 @@ public class INOConstants {
     public static final String MAINACTIVITY = "INO-MainActivity";
     public static final String NETWORK_UTIL = "INO-NetworkUtil";
     public static final String PASSWORD_UTIL = "INO-PasswordUtil";
+    public static final String USERSTATUS = "INO-UserStatus";
+    public static final String DATEUNIT = "INO-DateUnit";
 
     // Constants for User Status
     public static final String USER_STATUS_100 = "STATUS_GO_TO_WORK";
     public static final String USER_STATUS_101 = "STATUS_GO_TO_HOME";
-    public static final String USER_STATUS_102 = "STATUS_RESTING_AT_HOME";
-    public static final String USER_STATUS_103 = "STATUS_WORKING";
+    public static final String USER_STATUS_102 = "STATUS_REST";
+    public static final String USER_STATUS_103 = "STATUS_WORK";
 
     // Constants for Network Status
     public static final String NETWORK_STATE_CONNECTED      = "NETWORK_CONNECTED";
@@ -35,4 +37,9 @@ public class INOConstants {
     // Constants for Tag
     public static final String TAG_USER_INFO_PASSWORD = "USER_INFO_PASSWORD";
     public static final String TAG_USER_INFO_ID = "USER_INFO_ID";
+
+    // Constants for DateUnit Tag
+    public static final String TAG_DATE_UNIT_CURRENT_UPLOAD = "DATEUNIT_CURRENT_UPLOAD";
+    public static final String TAG_DATE_UNIT_CURRENT_DOWNLOAD = "DATEUNIT_CURRENT_DOWNLOAD";
+    public static final String TAG_DATE_UNIT_COMMON = "DATEUNIT";
 }

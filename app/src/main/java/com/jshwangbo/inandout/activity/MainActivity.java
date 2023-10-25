@@ -13,11 +13,16 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.Callbacks;
 import com.jshwangbo.inandout.util.INOConstants;
+import com.jshwangbo.inandout.util.UserStatus;
 import com.jshwangbo.inandout.util.network.NetworkUtil;
 
 public class MainActivity extends AppCompatActivity implements MyWidget{
@@ -26,10 +31,17 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
     public static MainActivity mainActivity;
     public static NetworkReceiver networkReceiver;
 
+    public static UserStatus userStatus;
+
     private AppCompatButton btnLog;
     private AppCompatButton btnMap;
     private AppCompatButton btnStatistics;
     private AppCompatButton btnRegister;
+    private ImageView imgBtnReload;
+    private ImageView imgHome;
+    private ImageView imgStatus;
+    private ImageView imgCompany;
+    private TextView txtStatus;
 
     public static boolean bIsRegistered = false;
     public static boolean bIsConnectedNetwork = false;
@@ -75,13 +87,18 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
                     Toast.makeText(mainActivity, "네트워크 연결 확인이 필요합니다.", Toast.LENGTH_SHORT).show();
                 }
 
+            } else if (v.getId() == R.id.img_button_reload){
+                Toast.makeText(mainActivity, "새로고침 요청", Toast.LENGTH_SHORT).show();
+                Animation animation = AnimationUtils.loadAnimation(mainActivity.getApplicationContext(), R.anim.anim_reload);
+                v.startAnimation(animation);
+
             } else {
                 iTargetActivity = null;
                 Log.d(TAG, "Wrong Button ID");
             }
 
             if(iTargetActivity == null) {
-                Log.d(TAG, "iTargetActivity is Null Object");
+                Log.d(TAG, ":: iTargetActivity is Null Object");
             } else {
                 startActivity(iTargetActivity);
             }
@@ -94,15 +111,21 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
 
     @Override
     public void initWidget() {
-        btnRegister   = (AppCompatButton) mainActivity.findViewById(R.id.button_register);
-        btnLog        = (AppCompatButton) mainActivity.findViewById(R.id.button_log);
-        btnMap        = (AppCompatButton) mainActivity.findViewById(R.id.button_map);
-        btnStatistics = (AppCompatButton) mainActivity.findViewById(R.id.button_statistics);
+        btnRegister     = (AppCompatButton) mainActivity.findViewById(R.id.button_register);
+        btnLog          = (AppCompatButton) mainActivity.findViewById(R.id.button_log);
+        btnMap          = (AppCompatButton) mainActivity.findViewById(R.id.button_map);
+        btnStatistics   = (AppCompatButton) mainActivity.findViewById(R.id.button_statistics);
+
+        imgBtnReload    = (ImageView) mainActivity.findViewById(R.id.img_button_reload);
+        imgHome         = (ImageView) mainActivity.findViewById(R.id.img_home);
+        imgCompany      = (ImageView) mainActivity.findViewById(R.id.img_company);
+        imgStatus       = (ImageView) mainActivity.findViewById(R.id.img_status);
 
         btnStatistics.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
         btnLog.setOnClickListener(this);
         btnMap.setOnClickListener(this);
+        imgBtnReload.setOnClickListener(this);
 
         mainActivity.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
@@ -111,6 +134,8 @@ public class MainActivity extends AppCompatActivity implements MyWidget{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userStatus = new UserStatus();
 
         mainActivity        = this;
         networkReceiver     = new NetworkReceiver(this);
