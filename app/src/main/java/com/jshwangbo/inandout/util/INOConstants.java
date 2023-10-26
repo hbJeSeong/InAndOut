@@ -15,14 +15,6 @@ public class INOConstants {
     // Constants for Action
     public static final String ACTION_NETWORK_CONNECT = "ACTION_NETWORK_CONNECT";
 
-    // Constants for Password Error Code
-    public static final String PASSWORD_VALID                       = "VALID_PASSWORD";
-    public static final String PASSWORD_ERROR_INVALID_SPACE         = "INVALID_PASSWORD_SPACE";
-    public static final String PASSWORD_ERROR_INVALID_WRONG_CHAR    = "INVALID_PASSWORD_WRONG_CHARACTER";
-    public static final String PASSWORD_ERROR_INVALID_LENGTH_SHORT  = "INVALID_PASSWORD_TOO_SHORT";
-    public static final String PASSWORD_ERROR_INVALID_LENGTH_LONG   = "INVALID_PASSWORD_TOO_LONG";
-    public static final String PASSWORD_ERROR_INVALID               = "INVALID_PASSWORD";
-
     // Constants for DateUnit Tag
     public static final String TYPE_DATE_UNIT_CURRENT_UPLOAD    = "DATEUNIT_CURRENT_UPLOAD";
     public static final String TYPE_DATE_UNIT_CURRENT_DOWNLOAD  = "DATEUNIT_CURRENT_DOWNLOAD";

@@ -31,7 +31,9 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
         if (v.getId() == R.id.button_submit) {
             if(isValidStateForSubmit()){
-                if (isPasswordCorrect(editTextPw.getText().toString(), editTextRePw.getText().toString())) {
+                String sPassword1 = editTextPw.getText().toString();
+                String sPassword2 = editTextRePw.getText().toString();
+                if (SecurityUtil.isPasswordCorrect(sPassword1, sPassword2)) {
                     new AlertDialog.Builder(this)
                             .setTitle("사용자 등록")
                             .setMessage("진행하시겠습니까?")
@@ -112,15 +114,6 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-    private boolean isPasswordCorrect(String arg1, String arg2){
-        Log.d(TAG, ":: isPasswordCorrect");
-        if (SecurityUtil.isValidPassword(arg1)){
-            if (arg1.equals(arg2))
-                return true;
-        }
-        return false;
     }
 
     private boolean isValidStateForSubmit(){
