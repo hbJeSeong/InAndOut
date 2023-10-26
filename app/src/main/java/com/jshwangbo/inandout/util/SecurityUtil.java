@@ -1,7 +1,14 @@
 package com.jshwangbo.inandout.util;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
+import com.jshwangbo.inandout.activity.MainActivity;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,4 +57,48 @@ public class SecurityUtil {
 
         return result;
     }
+
+    private static String getUniqueValue(final Context context) {
+
+        if (context == null){
+            Log.d(TAG, ":: getUniqueValue :: \"FAILED\" = Context is Null");
+            return null;
+        }
+
+        @SuppressLint("HardwareIds")
+        String sUnique = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        return sUnique;
+    }
+
+    public static String getSessionKey(final Context context) {
+        String sNewSessionKey = "";
+        StringBuffer stringBuffer;
+        MessageDigest md = null;
+
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+//            throw new RuntimeException(e);
+            Log.d(TAG, ":: getSessionKey :: \"FAILED\" = Fail to get MessageDigest Instance");
+            return null;
+        }
+
+        md.update(getUniqueValue(context).getBytes());
+        stringBuffer = new StringBuffer();
+
+        byte byteData[] = md.digest();
+        for (int i=0; i<byteData.length; i++){
+            stringBuffer.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+        sNewSessionKey = stringBuffer.toString().toUpperCase();
+
+        Log.d(TAG, ":: getSessionKey :: New Session Key = " + sNewSessionKey);
+
+        return sNewSessionKey;
+    }
+
+//    public static String encrypt(){
+//
+//    }
 }
