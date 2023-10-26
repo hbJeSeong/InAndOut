@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserStatus {
-    public static final String TAG = INOConstants.USERSTATUS;
+    public static final String TAG = "INO-UserStatus";
     private String sUserStatus;
     private boolean bIsRegistered;
     private DateUnit currentUpload;
@@ -101,12 +101,18 @@ public class UserStatus {
     }
 
     public void action(final String str){
-
+        /*
+        * TODO
+        * 출근 - 시작 로직
+        * 출근 - 완료 로직
+        * 퇴근 - 시작 로직
+        * 퇴근 - 완료 로직
+         */
     }
 }
 
 class DateUnit {
-    public static final String TAG = INOConstants.DATEUNIT;
+    public static final String TAG = "INO-DateUnit";
     public String sDate;
     public String sTime;
 

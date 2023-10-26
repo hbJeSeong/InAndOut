@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,11 +23,11 @@ import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.Callbacks;
 import com.jshwangbo.inandout.util.INOConstants;
 import com.jshwangbo.inandout.util.UserStatus;
-import com.jshwangbo.inandout.util.network.NetworkUtil;
+import com.jshwangbo.inandout.util.NetworkUtil;
 
 public class MainActivity extends AppCompatActivity implements MyWidget{
 
-    static String TAG = INOConstants.MAINACTIVITY;
+    static String TAG = "INO-MainActivity";
     public static MainActivity mainActivity;
     public static NetworkReceiver networkReceiver;
 

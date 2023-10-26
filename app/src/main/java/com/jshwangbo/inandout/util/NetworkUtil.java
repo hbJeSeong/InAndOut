@@ -1,4 +1,4 @@
-package com.jshwangbo.inandout.util.network;
+package com.jshwangbo.inandout.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -9,7 +9,7 @@ import com.jshwangbo.inandout.util.INOConstants;
 
 public class NetworkUtil  {
 
-    public static final String TAG = INOConstants.NETWORK_UTIL;
+    public static final String TAG = "INO-NetworkUtil";
 
     public static boolean isConnected(Context context){
         Log.d(TAG, ":: isConnected() :: call");

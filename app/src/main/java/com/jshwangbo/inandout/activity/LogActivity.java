@@ -22,7 +22,7 @@ import java.util.Date;
 
 public class LogActivity extends AppCompatActivity implements MyWidget {
 
-    static String TAG = INOConstants.LOGACTIVITY;
+    static String TAG = "INO-LogActivity";
     public AppCompatButton btnDate;
     public AppCompatButton btnLoad;
     public CheckBox ckBoxDate;

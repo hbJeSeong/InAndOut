@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.INOConstants;
-import com.jshwangbo.inandout.util.password.PasswordUtil;
+import com.jshwangbo.inandout.util.SecurityUtil;
 
 public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
-    static String TAG = INOConstants.REGISTERACTIVITY;
+    static String TAG = "INO-RegisterActivity";
     public AppCompatButton btnSubmit;
     public EditText editTextId;
     public EditText editTextPw;
@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
     private boolean isPasswordCorrect(String arg1, String arg2){
         Log.d(TAG, ":: isPasswordCorrect");
-        if (PasswordUtil.isValidPassword(arg1)){
+        if (SecurityUtil.isValidPassword(arg1)){
             if (arg1.equals(arg2))
                 return true;
         }
