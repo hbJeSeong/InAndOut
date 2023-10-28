@@ -5,12 +5,23 @@ import android.content.Context;
 import android.provider.Settings;
 import android.util.Log;
 
-import com.jshwangbo.inandout.activity.MainActivity;
+import androidx.annotation.Nullable;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 public class SecurityUtil {
     public static final String TAG = "INO-SecurityUtil";
@@ -98,7 +109,54 @@ public class SecurityUtil {
         return sNewSessionKey;
     }
 
-//    public static String encrypt(){
-//
-//    }
+    public static String encrypt(final String sPlainText, Context context) {
+        final String ALGORITHM = "AES/CBC/PKCS5Padding";
+        String secretKey = getSessionKey(context);
+        String iv = secretKey.substring(0, 16);
+
+        try {
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
+            cipher.init(Cipher.ENCRYPT_MODE, keySpec, ivParameterSpec);
+
+            byte[] encryptd = cipher.doFinal(sPlainText.getBytes("UTF-8"));
+            String ret = Base64.getEncoder().encodeToString(encryptd);
+
+            Log.d(TAG, ":: encrypt :: RESULT = " + ret);
+
+            return ret;
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidAlgorithmParameterException | InvalidKeyException |
+                 IllegalBlockSizeException | UnsupportedEncodingException | BadPaddingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String decrypt(final String sCipher, Context context) {
+        final String ALGORITHM = "AES/CBC/PKCS5Padding";
+        String secretKey = getSessionKey(context);
+        String iv = secretKey.substring(0, 16);
+
+        try {
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), "AES");
+            IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes());
+            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivParameterSpec);
+
+            byte[] decodedText = Base64.getDecoder().decode(sCipher);
+            byte[] decrypted = cipher.doFinal(decodedText);
+
+            String ret = new String(decrypted, "UTF-8");
+
+            Log.d(TAG, ":: decrypt :: RESULT = " + ret);
+
+            return ret;
+
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException |
+                 InvalidAlgorithmParameterException | InvalidKeyException | BadPaddingException |
+                 IllegalBlockSizeException | UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

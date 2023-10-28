@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.jshwangbo.inandout.R;
 import com.jshwangbo.inandout.util.Callbacks;
 import com.jshwangbo.inandout.util.INOConstants;
+import com.jshwangbo.inandout.util.SecurityUtil;
 import com.jshwangbo.inandout.util.UserStatus;
 import com.jshwangbo.inandout.util.NetworkUtil;
 
