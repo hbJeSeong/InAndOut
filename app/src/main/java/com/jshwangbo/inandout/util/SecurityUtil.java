@@ -82,7 +82,7 @@ public class SecurityUtil {
         return sUnique;
     }
 
-    public static String getSessionKey(final Context context) {
+    private static String getSessionKey(final Context context) {
         String sNewSessionKey = "";
         StringBuffer stringBuffer;
         MessageDigest md = null;
