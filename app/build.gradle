@@ -2,10 +2,6 @@ plugins {
     id 'com.android.application'
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def kakao_map_key = properties.getProperty('kakao_map_app_key')
-
 android {
     namespace 'com.jshwangbo.inandout'
     compileSdk 33
@@ -16,8 +12,6 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
-        manifestPlaceholders = [kakaoMapKey : kakao_map_key]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -31,8 +25,6 @@ android {
             minifyEnabled false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "MAIN_SERVER_IP", properties['server.ip']
-            buildConfigField "String", "MAIN_SERVER_PORT", properties['server.port']
         }
 
         release {
@@ -47,10 +39,6 @@ android {
 }
 
 dependencies {
-
-    implementation 'com.kakao.maps.open:android:2.6.0'
-    implementation 'com.kakao.sdk:v2-all:2.17.0'
-
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
