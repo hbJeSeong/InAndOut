@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.jshwangbo.inandout.R;
-import com.jshwangbo.inandout.util.INOConstants;
 
 public class StatisticsActivity extends AppCompatActivity implements MyWidget{
 

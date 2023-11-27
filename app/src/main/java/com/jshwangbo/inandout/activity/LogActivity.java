@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jshwangbo.inandout.R;
-import com.jshwangbo.inandout.util.INOConstants;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jshwangbo.inandout.R;
-import com.jshwangbo.inandout.util.INOConstants;
-import com.jshwangbo.inandout.util.SecurityUtil;
 
 public class RegisterActivity extends AppCompatActivity implements MyWidget{
 
